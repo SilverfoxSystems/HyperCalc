@@ -20,34 +20,33 @@ Public Class Form1
         If Strings.Left(s, 1) <> "-" Then
             If InStr(s, "e") Then
                 s1 = s.TrimStart("0")
-            Else
+            ElseIf InStr(s, ".") Then
                 s1 = s.Trim("0")
+            Else
+                s1 = s.TrimStart("0")
             End If
 
-            If Strings.Left(s, 1) = "." Then s1 = "0" + s1
-
-
+            If Strings.Left(s1, 1) = "." Then s1 = "0" + s1
 
         Else
             s1$ = s.Remove(0, 1)
             If InStr(s, "e") Then
                 s1 = s1.TrimStart("0")
-                If Strings.Left(s, 1) = "." Then
-                    s1 = "-0" + s1
-                End If
-            Else
+            ElseIf InStr(s, ".") Then
                 s1 = s1.Trim("0")
-                If Strings.Left(s, 1) = "." Then
-                    s1 = "-0" + s1
-                End If
+            Else
+                s1 = s1.TrimStart("0")
+            End If
+            If Strings.Left(s1, 1) = "." Then
+                s1 = "-0" + s1
+            Else
+                s1 = "-" + s1
+
             End If
         End If
 
         If Strings.Right(s1, 1) = "." Then
             s1 += "0"
-        End If
-        If Strings.Left(s1, 1) = "." Then
-            s1 = "0" + s1
         End If
         Return s1
     End Function
