@@ -15,7 +15,7 @@ Public Class Form1
     Dim lastTextInp$ = ""
 
     Function olepšaj(s$) As String
-
+'this function removes unneccesary zeros from the decimal output string 
         s1$ = ""
         If Strings.Left(s, 1) <> "-" Then
             If InStr(s, "e") Then
@@ -379,7 +379,7 @@ skip:
 
         Select Case e.KeyCode
             Case Keys.Oemplus, Keys.Add
-                'If unclear Then Button1.PerformClick()
+                If TextBox2.SelectionStart Then Button1.PerformClick()
                 ComboBox1.SelectedIndex = 0
             Case Keys.Subtract, Keys.OemMinus
 
@@ -396,19 +396,22 @@ skip:
                     End If
                 End With
 
-                'If unclear Then Button1.PerformClick()
+                Button1.PerformClick()
                 ComboBox1.SelectedIndex = 1
 
             Case Keys.Multiply, e.Shift And Keys.D8
-                'If unclear Then Button1.PerformClick()
+                If TextBox2.SelectionStart Then Button1.PerformClick()
                 ComboBox1.SelectedIndex = 2
             Case Keys.Divide, 191
-                'If unclear Then Button1.PerformClick()
+
+                If TextBox2.SelectionStart Then Button1.PerformClick()
                 ComboBox1.SelectedIndex = 3
+
             Case Keys.M
                 If TextBox2.SelectionStart Then
-
+                    Button1.PerformClick()
                     ComboBox1.SelectedIndex = 4
+
                 Else
                     e.Handled = False
                     e.SuppressKeyPress = False
@@ -434,45 +437,20 @@ skip:
 Keys.Back, Keys.Delete, Keys.Up, Keys.Down, Keys.Left, Keys.Right,
 Keys.Home, Keys.End, Keys.E
 
-
                 e.Handled = False
                 e.SuppressKeyPress = False
 
             Case Keys.Oemcomma
                 SendKeys.Send(".")
-
                 Exit Sub
+
 
         End Select
 
 
     End Sub
 
-    Private Sub Form1_KeyPress(sender As Object, e As KeyPressEventArgs) ' Handles Me.KeyPress
-
-        Select Case e.KeyChar
-            Case "+"
-                ComboBox1.SelectedIndex = 0
-
-            Case "-"
-            Case "*"
-            Case "/"
-
-            Case Else
-                Exit Sub
-        End Select
-        Button1.PerformClick()
-
-    End Sub
-
-    Private Sub TextBox2_TextChanged(sender As Object, e As EventArgs) Handles TextBox2.TextChanged
-
-    End Sub
-
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
-
-    End Sub
-
+    
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If Settings.ShowDialog() = vbOK Then loadSettings()
     End Sub
@@ -494,12 +472,5 @@ Keys.Home, Keys.End, Keys.E
         TextBox2.Focus()
     End Sub
 
-    Private Sub TextBox2_KeyDown(sender As Object, e As KeyEventArgs) ' Handles TextBox2.KeyDown
-        'If e.Modifiers Then e.SuppressKeyPress = True : Exit Sub
-        Select Case e.KeyCode
-            Case Keys.D0 To Keys.D9
-                e.SuppressKeyPress = False
-            Case Keys.OemPeriod ' ,keys.oemco
-        End Select
-    End Sub
+    
 End Class
