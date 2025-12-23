@@ -15,7 +15,7 @@ Public Class Form1
     Dim lastTextInp$ = ""
 
     Function olepšaj(s$) As String
-'this function removes unneccesary zeros from the decimal output string 
+'this function removes unnecessary zeros from the decimal output string 
         s1$ = ""
         If Strings.Left(s, 1) <> "-" Then
             If InStr(s, "e") Then
